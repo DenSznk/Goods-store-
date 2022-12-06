@@ -8,6 +8,8 @@ from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 
 
 def login(request):
+    """Login after registration"""
+
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
@@ -26,6 +28,8 @@ def login(request):
 
 
 def registration(request):
+    """Create USER """
+
     if request.method == 'POST':
         form = UserRegistrationForm(data=request.POST)
         if form.is_valid():
@@ -40,6 +44,8 @@ def registration(request):
 
 @login_required
 def profile(request):
+    """Personal account of a registered user"""
+
     if request.method == 'POST':
         form = UserProfileForm(instance=request.user, data=request.POST, files=request.FILES)
         if form.is_valid():
@@ -56,5 +62,7 @@ def profile(request):
 
 
 def logout(request):
+    """Sign out of account"""
+
     auth.logout(request)
     return HttpResponseRedirect(reverse('login'))

@@ -20,13 +20,13 @@
                     <div class="form-row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="small mb-1" for="{{ form.first_name.id_for_label }}">Имя</label>
+                                <label class="small mb-1" for="{{ form.first_name.id_for_label }}">First Name</label>
                                 {{ form.first_name }}
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="small mb-1" for="{{ form.last_name.id_for_label }}">Фамилия</label>
+                                <label class="small mb-1" for="{{ form.last_name.id_for_label }}">Last Name</label>
                                 {{ form.last_name }}
                             </div>
                         </div>
@@ -36,19 +36,19 @@
                             <div class="custom-file">
                                 {{ form.image }}
                                 <label class="custom-file-label" for="{{ form.image.id_for_label }}">
-                                    Выберите изображение
+                                    Add image
                                 </label>
                             </div>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-lg-6">
-                            <label class="small mb-1" for="{{ form.username.id_for_label }}">Имя пользователя</label>
+                            <label class="small mb-1" for="{{ form.username.id_for_label }}">Username</label>
                             {{ form.username }}
                         </div>
                         <div class="col-lg-6">
                             <label class="small mb-1" for="{{ form.email.id_for_label }}">
-                                Адрес электронной почты
+                                Email
                             </label>
                             {{ form.email }}
                         </div>

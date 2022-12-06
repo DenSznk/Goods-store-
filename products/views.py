@@ -7,6 +7,8 @@ from products.models import Product, ProductCategory, Basket
 
 
 def index(request):
+    """Main page render"""
+
     context = {
         'title': 'Store'
     }
@@ -14,6 +16,8 @@ def index(request):
 
 
 def get_products(request, category_id=None):
+    """Receiving goods by category"""
+
     if category_id:
         page_obj = Product.objects.filter(category_id=category_id)
         context = {
@@ -37,6 +41,8 @@ def get_products(request, category_id=None):
 
 @login_required
 def basket_add(request, pk):
+    """adding product to basket"""
+
     product = Product.objects.get(id=pk)
     baskets = Basket.objects.filter(user=request.user, product=product)
     if not baskets.exists():
@@ -50,6 +56,8 @@ def basket_add(request, pk):
 
 @login_required
 def basket_remove(request, pk):
+    """Remove goods from basket"""
+
     basket = Basket.objects.get(id=pk)
     basket.delete()
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
