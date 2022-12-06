@@ -58,14 +58,14 @@
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{% url 'logout' %}">
-                                    Выйти
+                                    Logout
                                 </a>
                             </li>
                         </ul>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'users:login' %}">Login <i class="fas fa-sign-in-alt"></i></a>
+                        <a class="nav-link" href="{% url 'login' %}">Login <i class="fas fa-sign-in-alt"></i></a>
                     </li>
                 {% endif %}
             </ul>

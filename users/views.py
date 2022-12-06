@@ -1,10 +1,13 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth, messages
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView, UpdateView
 
 from products.models import Basket
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
+from users.models import User
 
 
 def login(request):
@@ -27,6 +30,33 @@ def login(request):
     return render(request, 'users/login.html', context)
 
 
+# class UserRegistrationView(CreateView):
+#     model = User
+#     form_class = UserRegistrationForm
+#     template_name = 'users/registration.html'
+#     success_url = reverse_lazy('user:login')
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(UserRegistrationView, self).get_context_data()
+#         context['title'] = 'Store Registration'
+#         return context
+#
+#
+# class UserProfileView(LoginRequiredMixin, UpdateView):
+#     model = User
+#     form_class = UserProfileForm
+#     template_name = 'users/profile.html'
+#
+#     def get_success_url(self):
+#         return reverse_lazy('user:profile', args=(self.object.id,))
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(UserProfileView, self).get_context_data()
+#         context['title'] = 'User Profile'
+#         context['baskets'] = Basket.objects.filter(user=self.request.user)
+#         return context
+
+
 def registration(request):
     """Create USER """
 
@@ -35,7 +65,7 @@ def registration(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'You are welcome!')
-            return HttpResponseRedirect(reverse('users:login'))
+            return HttpResponseRedirect(reverse('login'))
     else:
         form = UserRegistrationForm()
     context = {'form': form}
