@@ -18,13 +18,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
-from products.views import index
+from products.views import IndexView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('store/', include('products.urls')),
     path('user/', include('users.urls')),
-    path('', index, name='index'),
+    path('', IndexView.as_view(), name='index'),
 ]
 
 if settings.DEBUG:

@@ -57,7 +57,7 @@
 
             <div class="row">
 
-                {% for product in page_obj %}
+                {% for product in object_list %}
 
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
@@ -84,7 +84,8 @@
                 {% endfor %}
 
             </div>
-<div class="pagination ">
+{% if is_paginated %}
+            <div class="pagination ">
     <span class="step-links mx-left">
             {% if page_obj.has_previous %}
         <a href="?page=1">1</a>
@@ -100,6 +101,7 @@
 {% if paginator.num_pages != page_obj.next_page_number %}
 ...
 <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+{% endif %}
 {% endif %}
 {% endif %}
 
