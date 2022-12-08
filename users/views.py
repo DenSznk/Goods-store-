@@ -1,13 +1,12 @@
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth, messages
-from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView, UpdateView, TemplateView
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import HttpResponseRedirect, render
+from django.urls import reverse
+from django.views.generic import TemplateView
 
 from products.models import Basket
-from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
-from users.models import User, EmailVerification
+from users.forms import UserLoginForm, UserProfileForm, UserRegistrationForm
+from users.models import EmailVerification, User
 
 
 def login(request):
@@ -106,7 +105,7 @@ class EmailVerificationView(TemplateView):
         code = kwargs['code']
         user = User.objects.get(email=kwargs['email'])
         email_verifications = EmailVerification.objects.filter(user=user, code=code)
-        if email_verifications.exist():
+        if email_verifications.exists() and not email_verifications.first().is_expired():
             user.is_verified_email = True
             user.save()
             return super(EmailVerificationView, self).get(request, *args, **kwargs)
